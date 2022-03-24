@@ -1,14 +1,7 @@
 ### Python + FastAPI + Mangum + AWS Lambda Container
-
 A demo project to test the AWS Lambda container support with Python FastAPI framework. The purpose of the project is to show how to develop a REST API with FastAPI, how to build & test it locally and how to deploy it on AWS using serverless services (AWS ECR, AWS Lambda & AWS API Gateway).
 
-### Prerequisites
-
-- Docker CLI
-- Python 3.8
-
 ### Install dependencies
-
 A requirements file declare all dependencies (Mangum, FastAPI, Uvicorn, ...). Use the following command to install the required dependencies (For Python 3.8.5)
 
 ```
@@ -18,21 +11,17 @@ source venv/bin/activate
 ```
 
 ### Run locally
-
 Deploy on uvicorn :
-
 ```
 venv/bin/uvicorn app.app:app --reload --host 0.0.0.0 --port 5000
 ```
 
 You can test the application by using the following command : 
-
 ```
 curl http://localhost:5000/hello/
 ```
 
 ### Build the 'regular' container
-
 This command builds a container which will run a Uvicorn server and deploy the ASGI app on it : 
 
 ```
@@ -40,29 +29,23 @@ docker build -t hello-world-uvicorn .
 ```
 
 ### Run the container
-
 The command starts the container :
-
 ```
 docker run -p 5000:5000 hello-world-uvicorn:latest
 ```
 
 You can make a test with this command :
-
 ```
 curl http://localhost:5000/hello/
 ```
 
 ### Build the container for AWS Lambda
-
 Now we can build the container for AWS Lambda which will use the Mangum handler. We use another Dockerfile which will use a base image provided by AWS :
-
 ```
 docker build -t hello-world-lambda . -f Dockerfile.aws.lambda
 ```
 
 ### Run the AWS Lambda container for local test
-
 Let's start the container to test the lambda locally :
 
 ```
@@ -70,9 +53,7 @@ docker run -p 9000:8080 hello-world-lambda:latest
 ```
 
 ### Test the Lambda
-
 We send the input event that the lambda would receive from the API Gateway with the following command :
-
 ```
 curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{
     "resource": "/hello",
@@ -226,5 +207,7 @@ And the lambda output :
 ```
 
 ### Deploy the application on AWS
-
 [Step by step guide to deploy the application on AWS using console](./documentation/deployment/awsconsole/aws_console.md)
+
+## Issues
+- When using `--host 0.0.0.0` I get error: `[Errno 48] Address already in use`
