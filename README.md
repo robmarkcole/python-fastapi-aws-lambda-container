@@ -31,12 +31,12 @@ docker build -t hello-world-uvicorn .
 ### Run the container
 The command starts the container :
 ```
-docker run -p 5000:5000 hello-world-uvicorn:latest
+docker run -p 8080:80 hello-world-uvicorn:latest
 ```
 
 You can make a test with this command :
 ```
-curl http://localhost:5000/hello/
+curl http://localhost:8080/hello/
 ```
 
 ### Build the container for AWS Lambda
@@ -211,3 +211,4 @@ And the lambda output :
 
 ## Issues
 - When using `--host 0.0.0.0` I get error: `[Errno 48] Address already in use`
+- Some errir using port 5000 of the container, 80 is OK

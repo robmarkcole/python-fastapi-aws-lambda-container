@@ -3,5 +3,5 @@ COPY ./app ./app
 COPY ./requirements.txt ./requirements.txt
 RUN pip install -r ./requirements.txt
 ENV HOST="0.0.0.0"
-ENV PORT=5000
+ENV PORT=80
 ENTRYPOINT uvicorn app.app:app --host ${HOST} --port ${PORT}
