@@ -12,23 +12,17 @@ A demo project to test the AWS Lambda container support with Python FastAPI fram
 A requirements file declare all dependencies (Mangum, FastAPI, Uvicorn, ...). Use the following command to install the required dependencies (For Python 3.8.5)
 
 ```
-pip install -r ./requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+(venv) pip install -r requirements.txt
 ```
-
-TIP : Before installing required dependencies, do not forget to create a virtual environment using your favorite tool (Conda, ...).
 
 ### Run locally
 
-You can either use the following command :
+Deploy on uvicorn :
 
 ```
-python -m app.app
-```
-
-Or deploy on uvicorn :
-
-```
-uvicorn app.app:app --reload --host 0.0.0.0 --port 5000
+venv/bin/uvicorn app.app:app --reload --host 0.0.0.0 --port 5000
 ```
 
 You can test the application by using the following command : 
